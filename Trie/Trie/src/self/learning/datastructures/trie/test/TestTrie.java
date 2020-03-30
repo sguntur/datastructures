@@ -30,5 +30,13 @@ class TestTrie {
 		System.out.println(trie.find("3"));
 		System.out.println(trie.find("test"));
 	}
+	
+	
+	@Test
+	void testDelete() {
+		Trie trie = createExampleTrie();
+		trie.delete("test");
+		System.out.print(trie);
+	}
 
 }

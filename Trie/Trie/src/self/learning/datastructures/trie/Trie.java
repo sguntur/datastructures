@@ -36,6 +36,32 @@ public class Trie {
 	}
 	
 	public void delete(String word) {
+		deleteNode(root,word,0);
+	}
+
+	private boolean deleteNode(TrieNode current, String word, int index) {
+		
+		if(index == word.length()) {
+			if(!current.getIsWord()) {
+				return false;
+			}
+			current.setIsWord(false);
+			return current.getChildren().isEmpty();
+		}
+		
+		char ch = word.charAt(index);
+		TrieNode node= current.getChildren().get(ch);
+		if(node==null) {
+			return false;
+		}
+		boolean shouldDeleteNode = deleteNode(node,word,index+1) && !node.getIsWord();
+		
+		if(shouldDeleteNode) {
+			current.getChildren().remove(ch);
+			return current.getChildren().isEmpty();
+		}
+		
+		return false;
 		
 	}
 	
