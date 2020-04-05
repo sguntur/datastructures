@@ -50,7 +50,20 @@ public class BST {
 	}
 	
 	public void delete(int value) {
+		deleteRecursive(value, root);
+	}
+	
+	private Node deleteRecursive(int value, Node current) {
+		if(current == null) {
+			return null;
+		}
 		
+		if(value > current.getValue()) {
+			current.right = deleteRecursive(value,current.getRight());
+		}else if(value < current.getValue()) {
+			current.left = deleteRecursive(value,current.getRight());
+		}
+		return current;
 	}
 	
 	public boolean isEmpty() {
